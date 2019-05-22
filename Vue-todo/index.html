@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>搞事情</title>
+<link href="lib/normalize.css" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+	<div id="main">
+		<div class="navbar">
+			<h1>表事情</h1>
+		</div>
+		<div class="header">
+			开黑了么就写作业？
+		</div>
+		<form @submit.prevent="merge" id="task-form">
+			<div class="wrap">
+			未完成
+			<input v-model="current.title" id="task-input" type="text" autocomplete="off">
+			<button type="submit">submit</button>
+			</div>
+		</form>
+		<div class="task-list">
+			<div class="wrap">
+				<div v-for= "(todo,index) in list" class="item">
+				{{todo.title}}
+				<button @click="remove(index)">删除</button>
+				<button @click="setCurrent(todo)">更新</button>
+			</div>
+			</div>
+		</div>
+		<div class="task-list">
+		
+		<div class="wrap">
+		已完成
+			<div class="item complete">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+			</div>
+		</div>
+			
+		</div>
+	</div>
+<script src="lib/vue.js"></script>
+<script src="js/myStorage.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
