@@ -30,7 +30,7 @@
 		</form>
 		<div class="task-list">
 			<div class="wrap">
-			未完成
+			<div class="segment-title">未完成</div>
 			<task :todo="todo" v-if="!todo.completed" v-for= "todo in list"></task>
 				
 			</div>
@@ -38,12 +38,15 @@
 		<div class="task-list">
 		
 		<div class="wrap">
-		已完成
+		<div class="segment-title">已完成</div>
 			<div v-if="todo.completed" v-for= "todo in list" class="item complete">
-				<button @click="toggle_complete(todo.id)">未完成</button>
-				{{todo.title}}
+				<div @click="toggle_complete(todo.id)" class="toggle-complete"></div>
+				<span class="title">{{todo.title}}</span>
 				<button @click="remove(todo.id)">删除</button>
-				<button @click="setCurrent(todo)">更新</button>
+				<button @click="toggle_detail(todo.id)">详情</button>
+				<div v-if="todo.show_detail" class="detail">
+					{{todo.desc || '暂无详情'}}
+				</div>
 			</div>
 		</div>
 			
@@ -51,13 +54,13 @@
 	</div>
 	<!--提示音-->
 	<auto id="alert-sound">
-		<source src="./sound/">
+		<source src="./sound/alert.mp3">
 	</auto>
 	<!--模板-->
 	<template id="task-tpl">
 		<div class="item">
-				<button @click="action('toggle_complete',todo.id)">完成</button>
-				{{todo.title}}
+			<div @click="action('toggle_complete',todo.id)" class="toggle-complete"></div>
+				<span class="title">{{todo.title}}</span>
 				<button @click="action('remove',todo.id)">删除</button>
 				<button @click="action('setCurrent',todo)">更新</button>
 				<button @click="action('toggle_detail',todo.id)">详情</button>
